@@ -108,7 +108,7 @@ Outputs nothing if the archive does not contain RarVM code.
   Initial R7 Value = 262144
 ```
 
-## Notes
+## Licence
 
 UnRAR licence is included in the source folder.
 
