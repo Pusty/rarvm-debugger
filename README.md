@@ -65,20 +65,20 @@ Output an instruction trace of the execution of a RARVM program.
 Dump all code loaded in the RARVM without executing it.
 
 ```
-    ./rarvm-debugger d -dump example01.rar 
-    JMP      #0x00000001
-    MOVD     R0, #0x0000BEEF
-    CMPD     R0, #0x00C0FFEE
-    JZ       #0x00000006
-    MOVD     [#0x00001000], #0x2E2E6F4E
-    JMP      #0x00000008
-    MOVD     [#0x00001000], #0x21B39AB7
-    XOR      [#0x00001000], R0
-    MOVD     [#0x0003C020], #0x00001000
-    MOVD     [#0x0003C01C], #0x00000004
-    JMP      #0x0003FF00
-    MOVD     #0x00000000, #0x00000000
-    RETb 
+  ./rarvm-debugger d -dump example01.rar 
+  JMP      #0x00000001
+  MOVD     R0, #0x0000BEEF
+  CMPD     R0, #0x00C0FFEE
+  JZ       #0x00000006
+  MOVD     [#0x00001000], #0x2E2E6F4E
+  JMP      #0x00000008
+  MOVD     [#0x00001000], #0x21B39AB7
+  XOR      [#0x00001000], R0
+  MOVD     [#0x0003C020], #0x00001000
+  MOVD     [#0x0003C01C], #0x00000004
+  JMP      #0x0003FF00
+  MOVD     #0x00000000, #0x00000000
+  RETb 
 ```
 
 ### Print out Diagnostic Information
@@ -89,23 +89,23 @@ Output Debug information regarding the parsing of the RarVM programs parameters 
 Outputs nothing if the archive does not contain RarVM code.
 
 ```
-    ./rarvm-debugger d -diagnostic example04.rar 
-    FirstByte = 17
-    Length = 4E
-      Initial Block Start: 00000000
-      Default Block Length: 00000000
-      Modified Initial Register Flag: 1F
-        Changed Initial Register 0 to 0000006F
-        Changed Initial Register 1 to 6C000000
-        Changed Initial Register 2 to 006C0000
-        Changed Initial Register 3 to 00006500
-        Changed Initial Register 4 to 00000048
-      Code Size: 48
-    The checksum (B4) matches the expected value (B4).
-    Initial R6 Value = 0
-    Initial GlobalData[0x24] = 0
-    Initial GlobalData[0x28] = 0
-    Initial R7 Value = 262144
+  ./rarvm-debugger d -diagnostic example04.rar 
+  FirstByte = 17
+  Length = 4E
+    Initial Block Start: 00000000
+    Default Block Length: 00000000
+    Modified Initial Register Flag: 1F
+      Changed Initial Register 0 to 0000006F
+      Changed Initial Register 1 to 6C000000
+      Changed Initial Register 2 to 006C0000
+      Changed Initial Register 3 to 00006500
+      Changed Initial Register 4 to 00000048
+    Code Size: 48
+  The checksum (B4) matches the expected value (B4).
+  Initial R6 Value = 0
+  Initial GlobalData[0x24] = 0
+  Initial GlobalData[0x28] = 0
+  Initial R7 Value = 262144
 ```
 
 ## Notes
@@ -116,6 +116,11 @@ UnRAR licence is included in the source folder.
 # RARVM
 
 *Note that the RARVM was removed from unrar and winrar in the release of version 5.0 so the information displayed here has very few practical application*
+
+## Registers
+
+The Architecture provides 8 General Purpose Registers R0..R7, a program counter and a flag register containing a carry, zero and signed flag.
+R7 is used as a stack pointer by the instructions using the stack.
 
 ## Instruction Set
 
@@ -162,12 +167,11 @@ UnRAR licence is included in the source folder.
 | 26     | SBB[b]   | Rd, Rs     | [1][11110][b][Rd][Rs] | Rd = Rd - Rs - Carry Bit  |
 | 27     | PRINT    |            | [1][11111]            | Do nothing (see notes)  |
 
-## Encodings
-    
 [b] is the ByteMode bit which decides whether an Instruction operates on a 4 bytes or if the bit is set only byte at a time.
 
 For the other parameters the decoding function can be read here:
 https://github.com/pmachapman/unrar/blob/bca1c247dd58da11e500013130a22ca64e830a55/rarvm.cpp#L674
+It's notable that all operants can be registers, immediate values or memory references from a register, an offset or both.
 
 ## Environment
 
@@ -197,7 +201,7 @@ A binary which output depends on the initial register state, without tools or mo
 
 ## Example 02
 
-An example of self modifying instructions
+An example of self modifying instructions (See notes)
 
 ## Example 03
 
@@ -209,7 +213,7 @@ Multiple changed initial register states that contain the output at startup
 
 ## Example 05
 
-An example of included static binary data. Will copy over the static data to output it
+An example of included static binary data. It copies over the static data to output it
 
 
 ## References
