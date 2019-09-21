@@ -122,6 +122,8 @@ UnRAR licence is included in the source folder.
 The Architecture provides 8 General Purpose Registers R0..R7, a program counter and a flag register containing a carry, zero and signed flag.
 R7 is used as a stack pointer by the instructions using the stack.
 
+By default at the beginning of a program R3 holds the address of the global memory (which is 0x3C000), R4 the size of original data ,R5 the amount of instruction already executed, R6 the amount of bytes already written and R7 the size of the memory page (0x40000).
+
 ## Instruction Set
 
 | Opcode | Mnemonic | Parameters | Encoding              |  Description    | 
@@ -167,10 +169,11 @@ R7 is used as a stack pointer by the instructions using the stack.
 | 26     | SBB[b]   | Rd, Rs     | [1][11110][b][Rd][Rs] | Rd = Rd - Rs - Carry Bit  |
 | 27     | PRINT    |            | [1][11111]            | Do nothing (see notes)  |
 
-[b] is the ByteMode bit which decides whether an Instruction operates on a 4 bytes or if the bit is set only byte at a time.
+[b] is the ByteMode bit which decides whether an instruction operates on 4 bytes or only one byte. If the bit is set it switches to single byte mode.
 
 For the other parameters the decoding function can be read here:
 https://github.com/pmachapman/unrar/blob/bca1c247dd58da11e500013130a22ca64e830a55/rarvm.cpp#L674
+
 It's notable that all operants can be registers, immediate values or memory references from a register, an offset or both.
 
 ## Environment
@@ -179,7 +182,7 @@ I've done most of my testing with unrar 4.2.1 and WinRar 4.20
 
 ## Notes
 
-Since Version 3.3.0 instruction parameters data pointers point to the content of them by default, allow some cases forms of self modifying code
+Since Version 3.3.0 instruction parameters data pointers point to the content of themself by default, this allows for some interesting cases of self modifying code
 ```
 ./rarvm-debugger d -trace example02.rar 
 [0000] SUB      #0x00000002, #0x00000001
