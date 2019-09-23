@@ -115,14 +115,14 @@ UnRAR licence is included in the source folder.
 
 # RARVM
 
-*Note that the RARVM was removed from unrar and winrar in the release of version 5.0 so the information displayed here has very few practical application*
+*Note that the RARVM was removed from unrar and winrar in the release of version 5.0 so the information displayed here has very few practical applications*
 
 ## Registers
 
 The Architecture provides 8 General Purpose Registers R0..R7, a program counter and a flag register containing a carry, zero and signed flag.
 R7 is used as a stack pointer by the instructions using the stack.
 
-By default at the beginning of a program R3 holds the address of the global memory (which is 0x3C000), R4 the size of original data ,R5 the amount of instruction already executed, R6 the amount of bytes already written and R7 the size of the memory page (0x40000).
+By default at the beginning of a program R3 holds the address of the global memory (which is 0x3C000), R4 the size of original data, R5 the amount of instruction already executed, R6 the amount of bytes already written and R7 the size of the memory page (0x40000).
 
 ## Instruction Set
 
