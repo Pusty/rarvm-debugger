@@ -195,6 +195,8 @@ https://github.com/pmachapman/unrar/commit/614508aaf441d08de64d68bf3464ecfbd9b60
 In Version 3.6.1 the "PRINT" debug instruction was removed
 https://github.com/pmachapman/unrar/commit/30566e3abf4c9216858bae3ea6b44f048df8c4a5#diff-9fbcab26b4523426ccb1520539e7408b
 
+The article pdf was first published in [Paged Out! #2](https://pagedout.institute/) as "Looking at the RarVM" and is uploaded here for archive purpose.
+
 
 # Examples
 
